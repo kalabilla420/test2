@@ -31,7 +31,7 @@ jobs:
         host: ${{ secrets.HOSTNAME_LAB }}
         username: ${{ secrets.USER_NAME_LAB }}
         privateKey: ${{ secrets.AWS_PRIVATE_KEY_LAB }}
-        command: cd /var/www/html/test && git pull origin dev
+        command: cd /var/www/html/test2 && git pull origin dev
         
     - name: Deploy in EC2 LIVE
       if: ${{ github.ref_name == 'master' }}
@@ -40,4 +40,4 @@ jobs:
         host: ${{ secrets.HOSTNAME_LIVE }}
         username: ${{ secrets.USER_NAME_LIVE }}
         privateKey: ${{ secrets.AWS_PRIVATE_KEY_LIVE }}
-        command: cd /var/www/html/test && git pull origin master
+        command: cd /var/www/html/test2 && git pull origin master
