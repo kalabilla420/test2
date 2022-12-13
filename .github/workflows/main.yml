@@ -1,0 +1,43 @@
+name: CBD GOLF
+
+
+on:
+  push:
+    branches: [ "dev","master" ]
+  
+
+
+permissions:
+  contents: read
+
+
+jobs:
+  build:
+
+
+    runs-on: self-hosted
+
+
+    steps:
+
+    
+   
+ 
+       
+    - name: Deploy in EC2 LAB
+      if: ${{ github.ref_name == 'dev' }}
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        host: ${{ secrets.HOSTNAME_LAB }}
+        username: ${{ secrets.USER_NAME_LAB }}
+        privateKey: ${{ secrets.AWS_PRIVATE_KEY_LAB }}
+        command: cd /var/www/html/test2 && git pull origin dev
+        
+    - name: Deploy in EC2 LIVE
+      if: ${{ github.ref_name == 'master' }}
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        host: ${{ secrets.HOSTNAME_LIVE }}
+        username: ${{ secrets.USER_NAME_LIVE }}
+        privateKey: ${{ secrets.AWS_PRIVATE_KEY_LIVE }}
+        command: cd /var/www/html/test2 && git pull origin master
