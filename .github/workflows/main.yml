@@ -42,8 +42,12 @@ jobs:
         privateKey: ${{ secrets.AWS_PRIVATE_KEY_LIVE }}
         command: cd /var/www/html/test2 && git pull origin master
 
-    - name: Slack Notification
-
-      uses: rtCamp/action-slack-notify@v2
+    - name: Slack notification
       env:
         SLACK_WEBHOOK: https://hooks.slack.com/services/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
+      
+        
+        SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
+      uses: Ilshidur/action-slack@2.0.2
+      with:
+        args: 'A new commit has been pushed.' # Optional
